@@ -17,11 +17,17 @@ export const app = express();
 dotenv.config({ path: "./config/.env" });
 
 // ✅ CORS setup (adjust FRONTEND_URL if needed)
-app.use(cors({
-  origin: [process.env.FRONTEND_URL], 
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: [
+      "http://localhost:8000", // local dev
+      "https://prgazettenoticetracker.vercel.app", // deployed frontend
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // allow cookies
+  })
+);
+
 
 // ✅ Body parsers
 app.use(express.json());
